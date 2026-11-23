@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Untuk Liaa 🌷</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;600&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg1:#fff1f4;--bg2:#fde8d8;--card:#fffdfb;--ink:#5a3a43;--soft:#a07a85;--accent:#e86a8a;--shadow:rgba(200,110,140,.25)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg1:#2a1820;--bg2:#32201f;--card:#3b2830;--ink:#ffe9ef;--soft:#d9aab8;--accent:#ff8fab;--shadow:rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{color-scheme:dark;--bg1:#2a1820;--bg2:#32201f;--card:#3b2830;--ink:#ffe9ef;--soft:#d9aab8;--accent:#ff8fab;--shadow:rgba(0,0,0,.4)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--ink);font-family:'Quicksand',system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;padding:28px 16px 40px}
+h1{font-family:'Pacifico',cursive,Georgia,serif;font-weight:400;font-size:2rem;margin:0;color:var(--accent);text-align:center}
+.sub{color:var(--soft);margin:6px 0 22px;text-align:center}
+.card{width:100%;max-width:380px;background:var(--card);border-radius:28px;box-shadow:0 14px 40px var(--shadow);padding:22px 22px 26px;text-align:center}
+.art{width:200px;max-width:70%;margin:0 auto;display:block;animation:bloom .7s ease}
+@keyframes bloom{from{opacity:0;transform:translateY(14px) scale(.92)}to{opacity:1;transform:none}}
+.name{font-family:'Pacifico',cursive,Georgia,serif;color:var(--accent);font-size:1.15rem;margin:8px 0 4px}
+.msg{font-size:1.08rem;line-height:1.65;margin:0;font-weight:600;animation:bloom .7s ease}
+.from{color:var(--soft);font-size:.9rem;margin-top:14px}
+.dots{display:flex;gap:10px;margin:20px 0 14px}
+.dots button{width:12px;height:12px;border-radius:50%;border:0;padding:0;background:var(--soft);opacity:.35;cursor:pointer}
+.dots button.on{opacity:1;background:var(--accent);transform:scale(1.25)}
+.btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{font:inherit;font-weight:600;border:0;border-radius:999px;padding:12px 22px;background:var(--accent);color:#fff;cursor:pointer;box-shadow:0 6px 16px var(--shadow)}
+.btn.alt{background:transparent;color:var(--accent);border:2px solid var(--accent);box-shadow:none}
+.hug{min-height:1.6em;margin-top:16px;color:var(--accent);font-weight:600;text-align:center}
+.petal{position:fixed;top:-20px;font-size:20px;pointer-events:none;animation:fall 3.5s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2}}
+</style>
+</head>
+<body>
+<h1>Untuk Liaa</h1>
+<p class="sub">Ada bunga kecil buat hari yang melelahkan ini 🌷</p>
+<div class="card">
+  <svg id="art" class="art" viewBox="0 0 200 220" aria-hidden="true"></svg>
+  <div class="name" id="ttl"></div>
+  <p class="msg" id="msg"></p>
+  <div class="from">— dengan sayang —</div>
+</div>
+<div class="dots" id="dots"></div>
+<div class="btns">
+  <button class="btn alt" id="prev">‹ Sebelumnya</button>
+  <button class="btn" id="next">Bunga berikutnya ›</button>
+</div>
+<button class="btn alt" id="hug" style="margin-top:14px">Terima pelukan 🤗</button>
+<div class="hug" id="hugm"></div>
+
+<script>
+const fl=(x,y,t,c,r)=>{r=r||16;let s='';
+ if(t==='rose')s=`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/><circle cx="${x}" cy="${y}" r="${r*.68}" fill="#fff" opacity=".22"/><circle cx="${x}" cy="${y}" r="${r*.36}" fill="${c}" stroke="#fff" stroke-opacity=".5" stroke-width="1.5"/>`;
+ else if(t==='sun'||t==='daisy'){const n=t==='sun'?14:9,pc=t==='sun'?'#ffc933':'#fff';for(let i=0;i<n;i++)s+=`<ellipse cx="${x}" cy="${y-r*.85}" rx="${r*.28}" ry="${r*.62}" fill="${pc}" stroke="#0001" transform="rotate(${i*360/n} ${x} ${y})"/>`;s+=`<circle cx="${x}" cy="${y}" r="${r*.5}" fill="${t==='sun'?'#7a4a21':'#ffc933'}"/>`}
+ else if(t==='tulip')s=`<path d="M${x-r*.8} ${y-r*.9}Q${x-r} ${y+r*.7} ${x} ${y+r}Q${x+r} ${y+r*.7} ${x+r*.8} ${y-r*.9}L${x+r*.35} ${y-r*.3}L${x} ${y-r}L${x-r*.35} ${y-r*.3}Z" fill="${c}"/><path d="M${x} ${y-r}L${x-r*.35} ${y-r*.3}Q${x} ${y+r*.8} ${x+r*.35} ${y-r*.3}Z" fill="#fff" opacity=".25"/>`;
+ else if(t==='lav')for(let i=0;i<6;i++)s+=`<ellipse cx="${x+(i%2?4:-4)}" cy="${y+i*8-14}" rx="5" ry="7" fill="${c}"/>`;
+ return s};
+const B=[
+{n:'Mawar Muda',m:'Pelan-pelan aja ya, Liaa. Kamu sudah berusaha keras hari ini, dan itu sudah lebih dari cukup.',bg:'#ffd1dc',f:[[100,52,'rose','#f2708f',20],[62,78,'rose','#ff9bb3',17],[138,78,'rose','#f2708f',17],[100,92,'rose','#ff9bb3',16]]},
+{n:'Matahari Kecil',m:'Kamu kuat, Liaa. Capeknya hari ini pasti ada ujungnya, dan aku selalu ada buat nemenin kamu.',bg:'#ffe9a8',f:[[100,50,'sun','',22],[60,84,'sun','',18],[140,84,'sun','',18],[100,100,'daisy','',13]]},
+{n:'Tulip Hangat',m:'Jangan lupa makan yang enak, minum air hangat, dan tidur cukup ya. Tubuhmu butuh dipeluk juga.',bg:'#ffd9c2',f:[[70,60,'tulip','#ff7a59',19],[100,48,'tulip','#ffb347',20],[130,60,'tulip','#ff7a59',19],[85,92,'tulip','#ff9a85',16],[115,92,'tulip','#ff9a85',16]]},
+{n:'Daisy Ceria',m:'Kerjaan boleh nunggu, tapi kesehatanmu enggak. Istirahat sebentar, kamu pantas banget buat itu.',bg:'#d9f0e3',f:[[100,48,'daisy','',20],[64,76,'daisy','',17],[136,76,'daisy','',17],[82,100,'rose','#ffb3c6',13],[120,100,'rose','#ffb3c6',13]]},
+{n:'Lavender Tenang',m:'Cepat sembuh ya, Liaa. Aku bangga banget sama kamu, bahkan di hari yang paling berat sekalipun.',bg:'#e6dcff',f:[[72,66,'lav','#9b7fe0'],[100,50,'lav','#b79cf2'],[128,66,'lav','#9b7fe0'],[86,86,'rose','#ffc2d9',14],[116,86,'rose','#ffc2d9',14]]}
+];
+function art(b){let s=`<circle cx="100" cy="100" r="92" fill="${b.bg}" opacity=".55"/>`;
+ b.f.forEach(f=>s+=`<path d="M${f[0]} ${f[1]+10}Q${(f[0]+100)/2} 150 100 175" stroke="#5e9c6a" stroke-width="3.5" fill="none" stroke-linecap="round"/>`);
+ s+=`<path d="M100 130q-22 14-30 28 20-4 30-12zM100 125q22 14 32 30-22-6-32-14z" fill="#78b784"/>`;
+ b.f.forEach(f=>s+=fl(...f));
+ s+=`<path d="M52 118L148 118L112 206Q100 212 88 206Z" fill="#fff6ea" stroke="#e9c9b2" stroke-width="2"/><path d="M52 118L100 150L148 118" fill="#ffd6df" stroke="#e9c9b2" stroke-width="2" stroke-linejoin="round"/><path d="M100 168l-14-9v18zM100 168l14-9v18z" fill="#e86a8a"/><circle cx="100" cy="168" r="4.5" fill="#c9506e"/>`;
+ return s}
+let i=0;const $=id=>document.getElementById(id);
+const dots=$('dots');B.forEach((_,k)=>{const d=document.createElement('button');d.setAttribute('aria-label','Kartu '+(k+1));d.onclick=()=>show(k);dots.appendChild(d)});
+function show(k){i=(k+B.length)%B.length;const b=B[i];
+ const a=$('art'),m=$('msg');a.innerHTML=art(b);
+ [a,m].forEach(e=>{e.style.animation='none';e.offsetWidth;e.style.animation=''});
+ $('ttl').textContent=b.n+' untuk Liaa';m.textContent=b.m;
+ [...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))}
+$('next').onclick=()=>show(i+1);$('prev').onclick=()=>show(i-1);
+const hugs=['Peluk erat dari jauh buat Liaa 🤗','Kamu hebat, Liaa. Sungguh. 💗','Istirahat dulu ya, sayang 🌷','Semoga cepat pulih ya, Liaa ✨'];let h=0;
+$('hug').onclick=()=>{$('hugm').textContent=hugs[h++%hugs.length];
+ for(let k=0;k<14;k++){const p=document.createElement('div');p.className='petal';p.textContent=['🌸','🌷','💗','🌼'][k%4];p.style.left=Math.random()*100+'vw';p.style.animationDelay=Math.random()*1.2+'s';document.body.appendChild(p);setTimeout(()=>p.remove(),5000)}};
+show(0);
+</script>
+</body>
+</html>
